@@ -1,0 +1,25 @@
+#sf-map {
+  background: #f2f2f2;
+  color:white;
+}
+
+#sf-conf-pane {
+  padding-top: 1em;
+  background: #f2f2f2;
+  color: black;
+}
+
+#sf-results-pane-header {
+  border-top: 1px solid #ccc;
+  padding-top: 1em;
+  background: #f2f2f2;
+  margin-top: 1em;
+}
+#sf-results-pane {
+  background: #f2f2f2;
+}
+#sf-results-pane img{
+  margin:0.5em;
+}
+
+#mapid { height: 400px;}
