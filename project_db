@@ -1,0 +1,176 @@
+-- phpMyAdmin SQL Dump
+-- version 4.6.5.2
+-- https://www.phpmyadmin.net/
+--
+-- Anamakine: localhost
+-- Üretim Zamanı: 04 Nis 2017, 21:49:49
+-- Sunucu sürümü: 10.1.21-MariaDB
+-- PHP Sürümü: 5.6.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Veritabanı: `project_db`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `deploy`
+--
+
+CREATE TABLE `deploy` (
+  `device_number` int(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `device`
+--
+
+CREATE TABLE `device` (
+  `device_id` int(11) NOT NULL,
+  `hw_platform` varchar(25) DEFAULT NULL,
+  `os_image` varchar(20) DEFAULT NULL,
+  `reporting_interval` int(11) DEFAULT NULL,
+  `packet_size` int(11) DEFAULT NULL,
+  `location_id` int(11) DEFAULT NULL,
+  `protocol_id` int(11) DEFAULT NULL,
+  `traffic_profile` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Tablo döküm verisi `device`
+--
+
+INSERT INTO `device` (`device_id`, `hw_platform`, `os_image`, `reporting_interval`, `packet_size`, `location_id`, `protocol_id`, `traffic_profile`) VALUES
+(1, 'x86 Generic Platform', 'RIoT x86', 10, 100, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `location`
+--
+
+CREATE TABLE `location` (
+  `location_id` int(11) NOT NULL,
+  `location` varchar(20) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Tablo döküm verisi `location`
+--
+
+INSERT INTO `location` (`location_id`, `location`) VALUES
+(1, 'Basement'),
+(2, 'Street Level'),
+(3, 'Apartment');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `protocol`
+--
+
+CREATE TABLE `protocol` (
+  `protocol_id` int(2) NOT NULL,
+  `protocol` varchar(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Tablo döküm verisi `protocol`
+--
+
+INSERT INTO `protocol` (`protocol_id`, `protocol`) VALUES
+(1, 'TCP'),
+(2, 'UDP');
+
+-- --------------------------------------------------------
+
+--
+-- Tablo için tablo yapısı `station`
+--
+
+CREATE TABLE `station` (
+  `station_id` int(11) UNSIGNED NOT NULL,
+  `antenna_height` decimal(6,0) DEFAULT NULL,
+  `antenna_tilt` int(3) DEFAULT NULL,
+  `sector_number` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dökümü yapılmış tablolar için indeksler
+--
+
+--
+-- Tablo için indeksler `device`
+--
+ALTER TABLE `device`
+  ADD PRIMARY KEY (`device_id`),
+  ADD KEY `location_id` (`location_id`),
+  ADD KEY `protocol_id` (`protocol_id`);
+
+--
+-- Tablo için indeksler `location`
+--
+ALTER TABLE `location`
+  ADD PRIMARY KEY (`location_id`);
+
+--
+-- Tablo için indeksler `protocol`
+--
+ALTER TABLE `protocol`
+  ADD PRIMARY KEY (`protocol_id`);
+
+--
+-- Tablo için indeksler `station`
+--
+ALTER TABLE `station`
+  ADD PRIMARY KEY (`station_id`);
+
+--
+-- Dökümü yapılmış tablolar için AUTO_INCREMENT değeri
+--
+
+--
+-- Tablo için AUTO_INCREMENT değeri `device`
+--
+ALTER TABLE `device`
+  MODIFY `device_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+--
+-- Tablo için AUTO_INCREMENT değeri `location`
+--
+ALTER TABLE `location`
+  MODIFY `location_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+--
+-- Tablo için AUTO_INCREMENT değeri `protocol`
+--
+ALTER TABLE `protocol`
+  MODIFY `protocol_id` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+--
+-- Tablo için AUTO_INCREMENT değeri `station`
+--
+ALTER TABLE `station`
+  MODIFY `station_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+--
+-- Dökümü yapılmış tablolar için kısıtlamalar
+--
+
+--
+-- Tablo kısıtlamaları `device`
+--
+ALTER TABLE `device`
+  ADD CONSTRAINT `device_ibfk_1` FOREIGN KEY (`location_id`) REFERENCES `location` (`location_id`),
+  ADD CONSTRAINT `device_ibfk_2` FOREIGN KEY (`protocol_id`) REFERENCES `protocol` (`protocol_id`);
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
