@@ -11,7 +11,6 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 	L.marker([51.5, -0.09]).addTo(mymap)
 		.bindPopup("It is a base station.").openPopup();
 
-
 	var popup = L.popup();
 
 	function onMapClick(e) {

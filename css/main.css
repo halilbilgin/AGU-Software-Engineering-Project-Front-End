@@ -1,4 +1,6 @@
 #sf-map {
+  padding-top: 1em;
+  padding-bottom: 1em;
   background: #f2f2f2;
   color:white;
 }
@@ -7,6 +9,16 @@
   padding-top: 1em;
   background: #f2f2f2;
   color: black;
+}
+
+#sf-conf-pane-tab-panes {
+  padding-top: 1em;
+}
+
+
+#sf-control-bar{
+  padding-top: 1em;
+
 }
 
 #sf-results-pane-header {
