@@ -25,105 +25,89 @@
             </div>
             <div class="col" id="sf-conf-pane">
                 <h5>Configuration Pane</h5>
-
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                  <li class="nav-item"><a href="#home" class="nav-link active" aria-controls="home" role="tab" data-toggle="tab">Home</a></li>
-                  <li class="nav-item"><a href="#iot-devices" class="nav-link" aria-controls="iot-devices" role="tab" data-toggle="tab">iOT Devices</a></li>
+                  <li class="nav-item"><a href="#iot-devices" class="nav-link" aria-controls="iot-devices" role="tab" data-toggle="tab" >iOT Devices</a></li>
                   <li class="nav-item"><a href="#base-stations" class="nav-link" aria-controls="base-stations" role="tab" data-toggle="tab">Base Stations</a></li>
                 </ul>
-
+              <form>
                 <!-- Tab panes -->
                 <div class="tab-content" id="sf-conf-pane-tab-panes">
-                  <div role="tabpanel" class="tab-pane fade in active show" id="home">
+
+
+                  <!--   IoT Devices Tab -->
+
+                  <div role="tabpanel" class="tab-pane fade" id="iot-devices" >
+
                     <form>
-                      <div class="form-group">
-                        <label for="formGroupExampleInput">Number of Devices </label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="10">
-                      </div>
-                    </form>
-                    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="deploy-func()" id="deployButton">Deploy</button>
-                    <button type="button" class="btn btn-secondary btn-lg btn-block" onclick="clear-func()" id="clearButton">Clear</button>
-                  </div>
+                    <input type="hidden" name="type" value="iot-device">
+                      <select name="hardware" class="form-control">
+                        <option>Hardware Platform</option>
+                        <option value='x86 Generic Platform'>x86 Generic Platform</option>
+                      </select>
 
-                  <div role="tabpanel" class="tab-pane fade" id="iot-devices">
+                     <select name="os-image" class="form-control">
+                         <option>OS Image</option>
+                         <option value='RioT x86'>RioT x86</option>
+                       </select>
 
-                    <div class="btn-group">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Hardware Platform
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item" type="button" onclick="add-platform()" id="platformButton" >x86 Generic Platform</button>
-                        </div>
-                     </div>
+                       <select name="location" class="form-control">
+                           <option>Location</option>
+                           <option value='Basement'>Basement</option>
+                           <option value='Street Level'>Street Level</option>
+                           <option value='Apartment'>Apartment</option>
+                         </select>
 
-                     <div class="btn-group">
-                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         OS Image
-                       </button>
-                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                         <button class="dropdown-item" type="button" onclick="add-osimage()" id="osimageButton" >RIoT x86</button>
-                         </div>
-                      </div>
+                         <select name="protocol" class="form-control">
+                             <option>Protocol</option>
+                             <option value='TCP'>TCP</option>
+                             <option value='UDP'>UDP</option>
+                           </select>
 
-                    <div class="btn-group">
-                      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Location
-                      </button>
-                      <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <button class="dropdown-item" type="button" onclick="add-loc()" id="locButton" > Basement </button>
-                        <button class="dropdown-item" type="button" onclick="add-loc()" id="locButton"> Street Level </button>
-                        <button class="dropdown-item" type="button" onclick="add-loc()" id="locButton"> Apartment </button>
-                        </div>
-                     </div>
-
-                     <div class="btn-group">
-                       <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                         Protocol
-                       </button>
-                       <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                         <button class="dropdown-item" type="button" onclick="add-protocol()" id="protocolButton" > TCP </button>
-                         <button class="dropdown-item" type="button" onclick="add-protocol()" id="protocolButton"> UDP </button>
-                         </div>
-                      </div>
-
-                      <form>
                         <div class="form-group">
                           <label for="formGroupExampleInput">Reporting Interval (Minutes)</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput" placeholder="10">
+                          <input type="text" class="form-control" name="repint" placeholder="10">
                         </div>
                         <div class="form-group">
                           <label for="formGroupExampleInput2">Packet Size (Bytes)</label>
-                          <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="100">
+                          <input type="text" class="form-control" name="packsize" placeholder="100">
                         </div>
-                      </form>
+                        <div class='form-group'>
+                          <button class='btn btn-primary add'
+                              type='button' onclick="addIOT()">Add</button>
+                        </div>
+                    </form>
+
 
                   </div>
 
+                  <!--   Base Station Tab -->
+
                   <div role="tabpanel" class="tab-pane fade" id="base-stations">
-                    <form>
+              <form>
+                  <input type="hidden" name="type" value="iot-device">
                       <div class="form-group">
                         <label for="formGroupExampleInput">Antenna Height (Meters)</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput" placeholder="10">
-                      </div>
-                      <div class="form-group">
+                        <input type="text" class="form-control" name="ant-h" placeholder="10">
+
                         <label for="formGroupExampleInput2">Antenna Tilt</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
-                      </div>
-                      <div class="form-group">
+                        <input type="text" class="form-control" name="ant-t">
+
                         <label for="formGroupExampleInput2">Number of Sectors</label>
-                        <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="">
+                        <input type="text" class="form-control" name="sec-num">
                       </div>
+                      <button type="button" class="btn btn-primary add" onclick="addBase()" >Add</button>
                     </form>
                   </div>
 
                 </div>
+              </form>
             </div>
-        </div>
+          </div>
 
         <div class="row">
           <div class="col-12" id="sf-control-bar">
-            <h3> Control Bar </h3>
+              <h3> Control Bar </h3>
 
             <div class="btn-group" role="group" aria-label="play-pause-stop">
               <button type="button" class="btn btn-secondary" id="sf-play-button">
@@ -141,22 +125,22 @@
 
         </div>
 
-        <div class="row">
+          <div class="row">
             <div class="col-12" id="sf-results-pane-header">
               <h3>Results Area</h3>
             </div>
+          </div>
 
-        </div>
-        <div class="row" id="sf-results-pane">
-          <div class="col">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Michelsonmorley-boxplot.svg/300px-Michelsonmorley-boxplot.svg.png" style="background:#fff" alt="">
-          </div>
-          <div class="col">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Michelsonmorley-boxplot.svg/300px-Michelsonmorley-boxplot.svg.png" style="background:#fff" alt="">
-          </div>
-          <div class="col">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Michelsonmorley-boxplot.svg/300px-Michelsonmorley-boxplot.svg.png" style="background:#fff" alt="">
-          </div>
+          <div class="row" id="sf-results-pane">
+            <div class="col">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Michelsonmorley-boxplot.svg/300px-Michelsonmorley-boxplot.svg.png" style="background:#fff" alt="">
+            </div>
+            <div class="col">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Michelsonmorley-boxplot.svg/300px-Michelsonmorley-boxplot.svg.png" style="background:#fff" alt="">
+            </div>
+            <div class="col">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Michelsonmorley-boxplot.svg/300px-Michelsonmorley-boxplot.svg.png" style="background:#fff" alt="">
+            </div>
         </div>
     </div>
 
@@ -169,12 +153,6 @@
     <script type="text/javascript" src="js/conf-pane-func.js"></script>
 
 </body>
-
-
-
-
-
-
 
 
 </html>

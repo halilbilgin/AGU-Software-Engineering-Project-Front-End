@@ -8,8 +8,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 		id: 'mapbox.streets'
 	}).addTo(mymap);
 
-	L.marker([51.5, -0.09]).addTo(mymap)
-		.bindPopup("It is a base station.").openPopup();
+	//L.marker([51.5, -0.09]).addTo(mymap)
+	//	.bindPopup("It is a base station.").openPopup();
 
 	var popup = L.popup();
 
@@ -18,6 +18,19 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 			.setLatLng(e.latlng)
 			.setContent("You clicked the map at " + e.latlng.toString())
 			.openOn(mymap);
+
+			if(x==1){
+				L.marker(e.latlng).addTo(mymap)
+					.bindPopup("iOT Device").openPopup();
+				x=-1;
+			}
+
+			if(x==2){
+				L.marker(e.latlng).addTo(mymap)
+					.bindPopup("Base Station").openPopup();
+				x=-1;
+			}
+
 	}
 
 	mymap.on('click', onMapClick);
