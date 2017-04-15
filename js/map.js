@@ -18,19 +18,23 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 			.setLatLng(e.latlng)
 			.setContent("You clicked the map at " + e.latlng.toString())
 			.openOn(mymap);
-
-			if(x==1){
-				L.marker(e.latlng).addTo(mymap)
-					.bindPopup("iOT Device").openPopup();
-				x=-1;
+			if(! deviceInfo) {
+				return false;
 			}
 
-			if(x==2){
-				L.marker(e.latlng).addTo(mymap)
-					.bindPopup("Base Station").openPopup();
-				x=-1;
+			deviceInfo[deviceInfo.length] = {name:'latlng', value:e.latlng};
+			var marker = L.marker(e.latlng);
+			allMarkers.push(marker);
+			marker.addTo(mymap)
+			if(deviceInfo[0].value == 'iot-device'){
+					marker.bindPopup("iOT Device").openPopup();
+			} else {
+					marker.bindPopup("Base Station").openPopup();
 			}
 
+			allDevices.push(deviceInfo);
+
+			deviceInfo = null;
 	}
 
 	mymap.on('click', onMapClick);

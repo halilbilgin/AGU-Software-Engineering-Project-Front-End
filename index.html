@@ -72,9 +72,13 @@
                           <label for="formGroupExampleInput2">Packet Size (Bytes)</label>
                           <input type="text" class="form-control" name="packsize" placeholder="100">
                         </div>
+                        <div class="form-group">
+                          <label for="formGroupExampleInput2">Deployment Amount</label>
+                          <input type="text" class="form-control" name="deployment_amount" value="1">
+                        </div>
                         <div class='form-group'>
                           <button class='btn btn-primary add'
-                              type='button' onclick="addIOT()">Add</button>
+                              type='button'>Add</button>
                         </div>
                     </form>
 
@@ -85,7 +89,7 @@
 
                   <div role="tabpanel" class="tab-pane fade" id="base-stations">
               <form>
-                  <input type="hidden" name="type" value="iot-device">
+                  <input type="hidden" name="type" value="base-stations">
                       <div class="form-group">
                         <label for="formGroupExampleInput">Antenna Height (Meters)</label>
                         <input type="text" class="form-control" name="ant-h" placeholder="10">
@@ -96,7 +100,11 @@
                         <label for="formGroupExampleInput2">Number of Sectors</label>
                         <input type="text" class="form-control" name="sec-num">
                       </div>
-                      <button type="button" class="btn btn-primary add" onclick="addBase()" >Add</button>
+                      <div class="form-group">
+                        <label for="formGroupExampleInput2">Deployment Amount</label>
+                        <input type="text" class="form-control" name="deployment_amount" value="1">
+                      </div>
+                      <button type="button" class="btn btn-primary add">Add</button>
                     </form>
                   </div>
 
@@ -149,9 +157,36 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+    <script type="text/javascript" src="js/websocket.js?v=2"></script>
     <script type="text/javascript" src="js/map.js"></script>
     <script type="text/javascript" src="js/conf-pane-func.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $('#sf-play-button').click(function() {
+          var request = {
+            type: 'start',
+            delay: 1000,
+            allDevices: allDevices
+          };
 
+          ws.send(JSON.stringify(request));
+        })
+
+        $('#sf-pause-button').click(function() {
+          var request = {
+            type: 'pause'
+          }
+          ws.send(JSON.stringify(request));
+        })
+
+        $('#sf-stop-button').click(function() {
+          var request = {
+            type: 'stop'
+          }
+          ws.send(JSON.stringify(request));
+        })
+      })
+    </script>
 </body>
 
 
