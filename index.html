@@ -131,7 +131,7 @@
               </form>
             </div>
           </div>
-
+	  <!-- Control Bar -->
         <div class="row">
           <div class="col-12" id="sf-control-bar">
               <h3> Control Bar </h3>
@@ -146,7 +146,7 @@
               <button type="button" class="btn btn-secondary" id="sf-stop-button">
                 <img src="img/stop.png" width="30"/>
               </button>
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+              &emsp;&emsp;&emsp;&emsp;
 
               <h1>
                 <input type="range" handle = "square"  min="0" max="100" value="0" step="1" onchange="showValue(this.value)" />
@@ -160,7 +160,7 @@
                   </script>
               </h1>
 
-              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+              &emsp;&emsp;&emsp;&emsp;
 
             <h1><div id="txt"></div></h1>
 
@@ -170,12 +170,29 @@
 
         </div>
 
-          <div class="row">
+         <div class="row">
             <div class="col-12" id="sf-results-pane-header">
               <h3>Results Area</h3>
-               <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item active"><a href="#results1" class="nav-link" aria-controls="results1" role="tab" data-toggle="tab" >Results 1</a></li>
+                <li class="nav-item"><a href="#results2" class="nav-link" aria-controls="results2" role="tab" data-toggle="tab" >Results 2</a></li>
+              </ul>
+
+              <div class="tab-content" id="sf-results-panel">
+
+                <div role="tabpanel" class="tab-pane fade" id="results1" >
+                  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="results2">
+                  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+
             </div>
           </div>
+
+    </div>
 
       
     </div>
