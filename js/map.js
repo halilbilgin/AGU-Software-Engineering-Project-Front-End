@@ -13,6 +13,20 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 	var popup = L.popup();
 
+	var baseIcon = L.icon({
+	    iconUrl: 'img/baseS.png',
+	    iconSize:     [30, 30], // size of the icon
+
+			popupAnchor:  [-3, -15] // point from which the popup should open relative to the iconAnchor
+	});
+
+	var iotIcon = L.icon({
+	    iconUrl: 'img/iotD.png',
+	    iconSize:     [30, 30], // size of the icon
+
+			popupAnchor:  [-3, -15] // point from which the popup should open relative to the iconAnchor
+	});
+
 	function onMapClick(e) {
 		popup
 			.setLatLng(e.latlng)
@@ -23,13 +37,19 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 			}
 
 			deviceInfo[deviceInfo.length] = {name:'latlng', value:e.latlng};
-			var marker = L.marker(e.latlng);
-			allMarkers.push(marker);
-			marker.addTo(mymap)
+			console.log(deviceInfo);
+			var baseMarker = L.marker(e.latlng, {icon: baseIcon});
+			var iotMarker = L.marker(e.latlng, {icon: iotIcon});
+			allMarkers.push(baseMarker, iotMarker);
+
 			if(deviceInfo[0].value == 'iot-device'){
-					marker.bindPopup("iOT Device").openPopup();
-			} else {
-					marker.bindPopup("Base Station").openPopup();
+					iotMarker.addTo(mymap)
+					   .bindPopup("<b>IoT Device</b><br>Hardware: " + deviceInfo[1].value
+					              + "<br>OS Image: " + deviceInfo[2].value + "<br>Protocol: " + deviceInfo[4].value).openPopup();
+			} else if(deviceInfo[0].value == 'base-stations'){
+					baseMarker.addTo(mymap)
+					   .bindPopup("<b>Base Station</b><br> Antenna Height (m): " + deviceInfo[1].value
+					 					    + "<br>Antenna Tilt: " + deviceInfo[2].value + "<br>#Sectors: " + deviceInfo[3].value).openPopup();
 			}
 
 			allDevices.push(deviceInfo);
