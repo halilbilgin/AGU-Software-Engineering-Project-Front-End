@@ -12,9 +12,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     
   <!-- Graphs Source -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-<!--clock source-->
+	
+ <!--clock source-->
     <script>
     function startTime() {
         var today = new Date();
@@ -131,7 +133,9 @@
               </form>
             </div>
           </div>
+	    
 	  <!-- Control Bar -->
+	    
         <div class="row">
           <div class="col-12" id="sf-control-bar">
               <h3> Control Bar </h3>
@@ -169,7 +173,8 @@
           </div>
 
         </div>
-
+	    
+      <!-- Results Pane -->
          <div class="row">
             <div class="col-12" id="sf-results-pane-header">
               <h3>Results Area</h3>
