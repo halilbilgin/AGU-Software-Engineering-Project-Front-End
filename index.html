@@ -14,6 +14,24 @@
   <!-- Graphs Source -->
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
+<!--clock source-->
+    <script>
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+        document.getElementById('txt').innerHTML =
+        h + ":" + m + ":" + s;
+        var t = setTimeout(startTime, 500);
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
+    }
+    </script>
 
 </head>
 
@@ -128,6 +146,24 @@
               <button type="button" class="btn btn-secondary" id="sf-stop-button">
                 <img src="img/stop.png" width="30"/>
               </button>
+              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
+              <h1>
+                <input type="range" handle = "square"  min="0" max="100" value="0" step="1" onchange="showValue(this.value)" />
+                <span id="range">0</span>
+
+                  <script type="text/javascript">
+                    function showValue(newValue)
+                      {
+	                       document.getElementById("range").innerHTML=newValue;
+                       }
+                  </script>
+              </h1>
+
+              &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+
+            <h1><div id="txt"></div></h1>
+
             </div>
 
           </div>
