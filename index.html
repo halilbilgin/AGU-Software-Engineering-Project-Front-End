@@ -130,6 +130,26 @@
                   </div>
 
                 </div>
+		      <!-- Results Pane -->
+
+                  <div class="row">
+                    <div class="col-lg-8" id="sf-results-pane-header">
+                      <h4>Results Area</h4>
+                      <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item active"><a href="#results1" class="nav-link" aria-controls="results1" role="tab" data-toggle="tab" >Results 1</a></li>
+                        <li class="nav-item"><a href="#results2" class="nav-link" aria-controls="results2" role="tab" data-toggle="tab" >Results 2</a></li>
+                      </ul>
+                      <div class="tab-content" id="sf-results-panel">
+                        <div role="tabpanel" class="tab-pane fade" id="results1" >
+                          <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="results2">
+                          <div id="container2" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+                
               </form>
             </div>
           </div>
@@ -150,6 +170,7 @@
               <button type="button" class="btn btn-secondary" id="sf-stop-button">
                 <img src="img/stop.png" width="30"/>
               </button>
+		    
               &emsp;&emsp;&emsp;&emsp;
 
               <h1>
@@ -173,34 +194,8 @@
           </div>
 
         </div>
-	    
-      <!-- Results Pane -->
-         <div class="row">
-            <div class="col-12" id="sf-results-pane-header">
-              <h3>Results Area</h3>
-
-              <ul class="nav nav-tabs" role="tablist">
-                <li class="nav-item active"><a href="#results1" class="nav-link" aria-controls="results1" role="tab" data-toggle="tab" >Results 1</a></li>
-                <li class="nav-item"><a href="#results2" class="nav-link" aria-controls="results2" role="tab" data-toggle="tab" >Results 2</a></li>
-              </ul>
-
-              <div class="tab-content" id="sf-results-panel">
-
-                <div role="tabpanel" class="tab-pane fade" id="results1" >
-                  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                </div>
-
-                <div role="tabpanel" class="tab-pane fade" id="results2">
-                  <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                </div>
-
-            </div>
-          </div>
-
-    </div>
-
-      
-    </div>
+	         
+   </div>
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
