@@ -16,24 +16,7 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
 	
- <!--clock source-->
-    <script>
-    function startTime() {
-        var today = new Date();
-        var h = today.getHours();
-        var m = today.getMinutes();
-        var s = today.getSeconds();
-        m = checkTime(m);
-        s = checkTime(s);
-        document.getElementById('txt').innerHTML =
-        h + ":" + m + ":" + s;
-        var t = setTimeout(startTime, 500);
-    }
-    function checkTime(i) {
-        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-        return i;
-    }
-    </script>
+    
 
 </head>
 
@@ -166,8 +149,10 @@
               </h1>
 
               &emsp;&emsp;&emsp;&emsp;
+ <!--clock source-->
+              
+	<iframe src="http://free.timeanddate.com/clock/i5peaqpl/n19/fs36/bac09f" frameborder="0" width="291" height="46"></iframe>
 
-            <h1><div id="txt"></div></h1>
 
             </div>
 
