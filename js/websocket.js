@@ -10,6 +10,13 @@ var chart;
 var data = [
 [new Date(0), 0.7695]
 ];
+var data1 = [
+[new Date(0), 0.2820]
+];
+var data2 = [
+[new Date(0), 0.5935]
+];
+
 ws.onopen = function()
 {
 // Web Socket is connected, send data using send()
@@ -25,7 +32,7 @@ ws.onopen = function()
             zoomType: 'x'
         },
         title: {
-            text: 'Important'
+            text: 'Device Information'
         },
         subtitle: {
             text: document.ontouchstart === undefined ?
@@ -34,7 +41,7 @@ ws.onopen = function()
         xAxis: {
         },
         yAxis: {
-            
+
         },
         legend: {
             enabled: false
@@ -56,6 +63,7 @@ ws.onopen = function()
                 marker: {
                     radius: 2
                 },
+
                 lineWidth: 1,
                 states: {
                     hover: {
@@ -66,11 +74,18 @@ ws.onopen = function()
             }
         },
 
-        series: [{
-        data: data
-        }]
+        series: [
+          {name: 'Device 1',
+          data: data},
+          {name: 'Device 2',
+          data1:data1},
+          {name: 'Device 3',
+          data2:data2}
+
+      ]
+
     });
- 
+
 };
 
 ws.onmessage = function (evt)
@@ -78,10 +93,18 @@ ws.onmessage = function (evt)
   var received_msg = JSON.parse(evt.data);
   if(received_msg.generalCharts[0].x == 0)
     return false;
- 
-  data.push( [new Date(received_msg.generalCharts[0].x*100), received_msg.generalCharts[0].y]);
 
+  data.push( [new Date(received_msg.generalCharts[0].x*100), received_msg.generalCharts[0].y]);
   chart.series[0].setData(data, true);
+
+  data1.push( [new Date(received_msg.generalCharts[1].x*100), received_msg.generalCharts[1].y]);
+  chart.series[1].setData(data, true);
+
+  data2.push( [new Date(received_msg.generalCharts[2].x*100), received_msg.generalCharts[2].y]);
+  chart.series[2].setData(data, true);
+
+
+
   }
 ws.onclose = function()
 {
