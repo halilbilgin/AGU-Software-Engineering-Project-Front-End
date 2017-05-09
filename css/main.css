@@ -6,19 +6,19 @@
 }
 
 #sf-conf-pane {
-  padding-top: 1em;
+  padding-top: 3em;
   background: #f2f2f2;
   color: black;
 }
 
 #sf-conf-pane-tab-panes {
-  padding-top: 1em;
+  padding-top: 3em;
 }
 
 
 #sf-control-bar{
-  padding-top: 1em;
-
+  padding-top: 3em;
+  padding-bottom: 3em;
 }
 
 #sf-results-pane-header {
@@ -26,19 +26,15 @@
   padding-top: 1em;
   background: #f2f2f2;
   margin-top: 1em;
+  padding-bottom: 3em;
 }
-#sf-results-pane {
+#sf-results-panel {
+
   background: #f2f2f2;
+
 }
 #sf-results-pane img{
   margin:0.5em;
-}
-
-#container {
-	min-width: 310px;
-	max-width: 800px;
-	height: 400px;
-	margin: 0 auto
 }
 
 #mapid { height: 400px;}
