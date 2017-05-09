@@ -17,6 +17,8 @@
 
 
 #sf-control-bar{
+  border-style: 1px solid #ccc;
+
   padding-top: 3em;
   padding-bottom: 3em;
 }
@@ -35,6 +37,10 @@
 }
 #sf-results-pane img{
   margin:0.5em;
+}
+#txt{
+    border-style: 2px solid;
+
 }
 
 #mapid { height: 400px;}
