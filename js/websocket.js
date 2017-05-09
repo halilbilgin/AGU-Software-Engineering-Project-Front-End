@@ -7,6 +7,21 @@ if (! ( "WebSocket" in window) ){
 // Let us open a web socket
 var ws = new WebSocket("ws://195.181.211.72:443/");
 var chart;
+var data = [
+[new Date(0), 0.7695]
+];
+var data1 = [
+[new Date(1),  0.7695]
+];
+var data2 = [
+[new Date(2),  0.7695]
+];
+var data3 = [
+[new Date(3), 0.7695]
+];
+var data4 = [
+[new Date(4), 0.7695]
+];
 
 
 ws.onopen = function()
@@ -23,21 +38,29 @@ ws.onopen = function()
         chart: {
             zoomType: 'x'
         },
+
         title: {
             text: 'Device Information'
         },
+
         subtitle: {
             text: document.ontouchstart === undefined ?
                     'Click and drag in the plot area to zoom in' : 'Pinch the chart to zoom in'
         },
+
         xAxis: {
         },
+
         yAxis: {
 
         },
+
         legend: {
-            enabled: false
+          align: 'right',
+          verticalAlign: 'middle',
+          layout: 'vertical'
         },
+
         plotOptions: {
             area: {
                 fillColor: {
@@ -81,6 +104,9 @@ ws.onopen = function()
       ]
 
     });
+
+
+
 };
 
 ws.onmessage = function (evt)
@@ -103,6 +129,9 @@ ws.onmessage = function (evt)
 
   data4.push( [new Date(received_msg.generalCharts[4].x*100), received_msg.generalCharts[4].y]);
   chart.series[4].setData(data4, true);
+
+
+
 
   }
 ws.onclose = function()
