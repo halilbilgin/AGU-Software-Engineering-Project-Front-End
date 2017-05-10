@@ -9,18 +9,21 @@
   padding-top: 3em;
   background: #f2f2f2;
   color: black;
+  padding-bottom: 3em;
 }
 
 #sf-conf-pane-tab-panes {
   padding-top: 3em;
+
 }
 
-
 #sf-control-bar{
-  border-style: 1px solid #ccc;
-
-  padding-top: 3em;
+  margin-top: 20px;
+  padding-top: 1em;
+  border-top: 1px solid #ccc;
+  background : #B2EBF2;
   padding-bottom: 3em;
+  border-bottom: 1px solid #ccc;
 }
 
 #sf-results-pane-header {
@@ -29,6 +32,7 @@
   background: #f2f2f2;
   margin-top: 1em;
   padding-bottom: 3em;
+  margin-bottom: 20px;
 }
 #sf-results-panel {
 
@@ -37,6 +41,7 @@
 }
 #sf-results-pane img{
   margin:0.5em;
+
 }
 #txt{
     border-style: 2px solid;
@@ -44,3 +49,4 @@
 }
 
 #mapid { height: 400px;}
+
