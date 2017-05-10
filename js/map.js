@@ -54,7 +54,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 					 					    + "<br>Antenna Tilt: " + deviceInfo[2].value + "<br>#Sectors: " + deviceInfo[3].value).openPopup();
 			}
 		
-			deviceInfo[deviceInfo.length] = {name:'dist', value:dist};
+			if(deviceInfo[0].value == 'iot-device')
+				deviceInfo[deviceInfo.length] = {name:'dist', value:dist};
 			allDevices.push(deviceInfo);
 			deviceInfo = null;
 	}
