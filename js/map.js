@@ -53,9 +53,9 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 					   .bindPopup("<b>Base Station</b><br> Antenna Height (m): " + deviceInfo[1].value
 					 					    + "<br>Antenna Tilt: " + deviceInfo[2].value + "<br>#Sectors: " + deviceInfo[3].value).openPopup();
 			}
-
+		
+			deviceInfo[deviceInfo.length] = {name:'dist', value:dist};
 			allDevices.push(deviceInfo);
-
 			deviceInfo = null;
 	}
 
