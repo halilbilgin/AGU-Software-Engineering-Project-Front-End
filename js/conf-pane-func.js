@@ -11,7 +11,7 @@ $(function() {
     check = deviceInfo[1].value == null || deviceInfo[2].value == null
        || deviceInfo[3].value == null;
 
-    return baseCheck;
+    return ! check;
   }
     $(document).on('click', '.add', function() {
 
@@ -29,7 +29,7 @@ $(function() {
          }
     }
 
-    if(allDevices.length==0 && deviceInfo[0].value=='iot-device'){
+    if(allDevices.length==0 && deviceInfo && deviceInfo.length > 0 && deviceInfo[0].value=='iot-device'){
     alert('Deploy Base First');
       deviceInfo=null;
    }
