@@ -1,4 +1,4 @@
-var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+var mymap = L.map('mapid').setView([51.505, -0.09], 7);
 
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 18,
@@ -27,6 +27,24 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 			popupAnchor:  [-3, -15] // point from which the popup should open relative to the iconAnchor
 	});
 
+	function addRandomMarkers(times) {
+		for(i = 0; i < times; i++) {
+			var lat = getRandomInRange(allDevices[0][4].value.lat-2, allDevices[0][4].value.lat+2, 10);
+			var lng = getRandomInRange(allDevices[0][4].value.lng - 4, allDevices[0][4].value.lng + 4, 10);
+			var iotMarker = L.marker({lat:lat, lng:lng}, {icon: iotIcon});
+
+			var cloneDeviceInfo = jQuery.extend(true, {}, deviceInfo);
+			cloneDeviceInfo[8] = {name:'latlng', value:{lat: lat, lng:lng}};
+			var dist=distance(cloneDeviceInfo[8].value.lat,cloneDeviceInfo[8].value.lng, allDevices[0][4].value.lat, allDevices[0][4].value.lng);
+			cloneDeviceInfo[cloneDeviceInfo.length] = {name:'dist', value:dist};
+
+			iotMarker.addTo(mymap)
+				 .bindPopup("<b>IoT Device</b>" + "<br>Distance from BaseStation: " + dist + "<br>Hardware: " + deviceInfo[1].value
+										+ "<br>OS Image: " + deviceInfo[2].value + "<br>Protocol: " + deviceInfo[4].value).openPopup();
+			allDevices.push(cloneDeviceInfo);
+		}
+	}
+
 	function onMapClick(e) {
 		popup
 			.setLatLng(e.latlng)
@@ -37,7 +55,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 			}
 
 			deviceInfo[deviceInfo.length] = {name:'latlng', value:e.latlng};
-			console.log(deviceInfo);
+
 			var baseMarker = L.marker(e.latlng, {icon: baseIcon});
 			var iotMarker = L.marker(e.latlng, {icon: iotIcon});
 			allMarkers.push(baseMarker, iotMarker);
@@ -53,7 +71,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 					   .bindPopup("<b>Base Station</b><br> Antenna Height (m): " + deviceInfo[1].value
 					 					    + "<br>Antenna Tilt: " + deviceInfo[2].value + "<br>#Sectors: " + deviceInfo[3].value).openPopup();
 			}
-		
+
 			if(deviceInfo[0].value == 'iot-device')
 				deviceInfo[deviceInfo.length] = {name:'dist', value:dist};
 			allDevices.push(deviceInfo);
@@ -76,5 +94,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 }
 	}
 
+	function getRandomInRange(from, to, fixed) {
+        return (Math.random() * (to - from) + from).toFixed(fixed) * 1;
+  }
 
 	mymap.on('click', onMapClick);

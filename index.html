@@ -52,7 +52,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
                   <li class="nav-item"><a href="#iot-devices" class="nav-link" aria-controls="iot-devices" role="tab" data-toggle="tab" >IoT Devices</a></li>
-                  <li class="nav-item"><a href="#base-stations" class="nav-link" aria-controls="base-stations" role="tab" data-toggle="tab">Base Stations</a></li>
+                  <li class="nav-item"><a href="#base-stations" class="nav-link active" aria-controls="base-stations" role="tab" data-toggle="tab">Base Stations</a></li>
                 </ul>
               <form>
                 <!-- Tab panes -->
@@ -90,21 +90,21 @@
 
                         <div class="form-group">
                           <label for="formGroupExampleInput">Reporting Interval (Minutes)</label>
-                          <input type="text" class="form-control" name="repint" placeholder="10">
+                          <input type="number" class="form-control" name="repint" placeholder="10">
                         </div>
                         <div class="form-group">
                           <label for="formGroupExampleInput2">Packet Size (Bytes)</label>
-                          <input type="text" class="form-control" name="packsize" placeholder="100">
+                          <input type="number" class="form-control" name="packsize" placeholder="100">
                         </div>
-			    
+
 			<div class="form-group">
                           <label for="formGroupExampleInput2"> Deployment Amount </label>
-                          <input type="text" class="form-control" name="packsize" placeholder="10">
+                          <input type="number" class="form-control" name="packsize" placeholder="10">
                         </div>
-			    
+
                         <div class='form-group'>
                           <button class='btn btn-primary add' type='button'>Add</button>
-                          <button class='btn btn-primary' type="reset" name="button">Deploy</button>
+                          <button class='btn btn-primary deploy' type="button" name="button">Deploy</button>
 			  <button class='btn btn-primary' type="reset" name="button">Clear</button>
                         </div>
                     </form>
@@ -114,18 +114,18 @@
 
                   <!--   Base Station Tab -->
 
-                  <div role="tabpanel" class="tab-pane fade" id="base-stations">
+                  <div role="tabpanel" class="tab-pane active" id="base-stations">
               <form>
                   <input type="hidden" name="type" value="base-stations">
                       <div class="form-group">
                         <label for="formGroupExampleInput">Antenna Height (Meters)</label>
-                        <input type="text" class="form-control" name="ant-h" placeholder="10">
+                        <input type="number" class="form-control" name="ant-h" placeholder="10">
 
                         <label for="formGroupExampleInput2">Antenna Tilt</label>
                         <input type="text" class="form-control" name="ant-t">
 
                         <label for="formGroupExampleInput2">Number of Sectors</label>
-                        <input type="text" class="form-control" name="sec-num">
+                        <input type="number" class="form-control" name="sec-num">
                       </div>
                       <div class='form-group'>
                         <button class='btn btn-primary add'type='button'>Add</button>
@@ -177,7 +177,7 @@
               <h1><div id="txt"></div></h1>
               &emsp;
               &emsp;
-              <button class='btn btn-danger' type="reset" name="button" id = "clear-map"> Clear Map </button>
+              <button class='btn btn-danger' type="reset" name="button" onclick='location.reload(true);'>Clear Map</button>
             </div>
 
           </div>
@@ -194,12 +194,12 @@
                         <li class="nav-item"><a href="#results2" class="nav-link" aria-controls="results2" role="tab" data-toggle="tab" >Results 2</a></li>
                       </ul>
                       <div class="tab-content" id="sf-results-panel">
-                        <div role="tabpanel" class="tab-pane fade" id="results1" >
+                        <div role="tabpanel" class="tab-pane active" id="results1" >
                           <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                         </div>
 
                         <div role="tabpanel" class="tab-pane fade" id="results2">
-                          <div id="container2" style="height:500px;"></div>
+
                         </div>
 
                         <div role="tabpanel" class="tab-pane fade" id="results3">
@@ -223,6 +223,24 @@
 
       $(function() {
         $('#sf-play-button').click(function() {
+          if(lastRequest && lastRequest == 'start')
+            return false;
+
+          if((lastRequest && lastRequest == 'stop') || !lastRequest) {
+            if(chart.series)
+              while(chart.series.length > 0)
+                chart.series[0].remove(true);
+            seriesData = []
+            for(i = 0; i < allDevices.length; i++) {
+              seriesData.push({name: 'Device '+i,
+                  data: [new Date(i), 0.7695]
+                })
+              chart.addSeries(seriesData[seriesData.length-1], false);
+
+            }
+            chart.redraw();
+          }
+          lastRequest = 'start';
           var request = {
             type: 'start',
             delay: 1000,
@@ -233,9 +251,11 @@
         })
 
         $('#sf-pause-button').click(function() {
+          lastRequest = 'pause';
           var request = {
             type: 'pause'
           }
+          lastRequest = 'pause';
           ws.send(JSON.stringify(request));
         })
 
@@ -243,7 +263,13 @@
           var request = {
             type: 'stop'
           }
+          lastRequest = 'stop';
           ws.send(JSON.stringify(request));
+          $('#results2').html('');
+          for(i = 0; i < 3; i++) {
+            $('#results2').append('<div id="container'+(i+2)+'" style="height:500px; margin-bottom: 10px"></div>');
+            histogram(generatePlatforms(30), 'container'+(i+2), 'Device '+(i+1));
+          }
         })
       })
     </script>

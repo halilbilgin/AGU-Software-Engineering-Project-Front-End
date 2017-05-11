@@ -7,21 +7,11 @@ if (! ( "WebSocket" in window) ){
 // Let us open a web socket
 var ws = new WebSocket("ws://195.181.211.72:443/");
 var chart;
-var data = [
-[new Date(0), 0.7695]
-];
-var data1 = [
-[new Date(1),  0.7695]
-];
-var data2 = [
-[new Date(2),  0.7695]
-];
-var data3 = [
-[new Date(3), 0.7695]
-];
-var data4 = [
-[new Date(4), 0.7695]
-];
+var lastRequest = false;
+var allDevices = [];
+var deviceInfo = [];
+var allMarkers = [];
+var seriesData = [];
 
 
 ws.onopen = function()
@@ -89,23 +79,8 @@ ws.onopen = function()
             }
         },
 
-        series: [
-          {name: 'Device 1',
-          data: data},
-          {name: 'Device 2',
-          data1:data1},
-          {name: 'Device 3',
-          data2:data2},
-          {name: 'Device 4',
-          data2:data3},
-          {name: 'Device 5',
-          data2:data4}
-
-      ]
-
+        series:  seriesData
     });
-
-
 
 };
 
@@ -115,25 +90,12 @@ ws.onmessage = function (evt)
   if(received_msg.generalCharts[0].x == 0)
     return false;
 
-  data.push( [new Date(received_msg.generalCharts[0].x*100), received_msg.generalCharts[0].y]);
-  chart.series[0].setData(data, true);
-
-  data1.push( [new Date(received_msg.generalCharts[1].x*100), received_msg.generalCharts[1].y]);
-  chart.series[1].setData(data1, true);
-
-  data2.push( [new Date(received_msg.generalCharts[2].x*100), received_msg.generalCharts[2].y]);
-  chart.series[2].setData(data2, true);
-
-  data3.push( [new Date(received_msg.generalCharts[3].x*100), received_msg.generalCharts[3].y]);
-  chart.series[3].setData(data3, true);
-
-  data4.push( [new Date(received_msg.generalCharts[4].x*100), received_msg.generalCharts[4].y]);
-  chart.series[4].setData(data4, true);
-
-
-
-
+  for(i = 0; i < allDevices.length; i++) {
+    seriesData[i].data.push( [new Date(received_msg.generalCharts[i].x*100), received_msg.generalCharts[i].y]);
+    chart.series[i].setData(seriesData[i].data, true);
   }
+
+}
 ws.onclose = function()
 {
 // websocket is closed.
