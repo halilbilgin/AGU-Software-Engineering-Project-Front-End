@@ -11,7 +11,7 @@ $(function() {
     check = deviceInfo[1].value == null || deviceInfo[2].value == null
        || deviceInfo[3].value == null;
 
-    return ! baseCheck;
+    return baseCheck;
   }
     $(document).on('click', '.add', function() {
 
