@@ -8,8 +8,7 @@ $(function() {
   }
 
   function baseCheck() {
-    check = deviceInfo[1].value == "" || deviceInfo[2].value == ""
-       || deviceInfo[3].value == "";
+    check = deviceInfo[1].value == "";
 
     return check;
   }
