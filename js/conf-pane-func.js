@@ -33,9 +33,7 @@ $(function() {
         alert('Deploy Base First');
         deviceInfo=null;
       }
-       else alert('Choose a location');
     }
-
   })
 
   $(document).on('click', '.deploy', function () {
