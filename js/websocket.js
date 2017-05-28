@@ -5,7 +5,7 @@ if (! ( "WebSocket" in window) ){
  }
 
 // Let us open a web socket
-var ws = new WebSocket("ws://195.181.211.72:443/");
+var ws = new WebSocket("ws://217.112.83.250/");
 var chart;
 var lastRequest = false;
 var allDevices = [];
