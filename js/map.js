@@ -48,10 +48,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 	}
 
 	function onMapClick(e) {
-		popup
-			.setLatLng(e.latlng)
-			.setContent("You clicked the map at " + e.latlng.toString())
-			.openOn(mymap);
+		
 			if(! deviceInfo) {
 				return false;
 			}
@@ -66,12 +63,13 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 				var dist=distance(deviceInfo[8].value.lat,deviceInfo[8].value.lng, allDevices[0][4].value.lat, allDevices[0][4].value.lng);
 					iotMarker.addTo(mymap)
 					   .bindPopup("<b>IoT Device</b>" + "<br>Distance from BaseStation: " + dist + "<br>Hardware: " + deviceInfo[1].value
-					              + "<br>OS Image: " + deviceInfo[2].value + "<br>Protocol: " + deviceInfo[4].value).openPopup();
+					              + "<br>OS Image: " + deviceInfo[2].value + "<br>Protocol: " + deviceInfo[4].value);
 			} else if(deviceInfo[0].value == 'base-stations'){
 
 					baseMarker.addTo(mymap)
 					   .bindPopup("<b>Base Station</b><br> Antenna Height (m): " + deviceInfo[1].value
-					 					    + "<br>Antenna Tilt: " + deviceInfo[2].value + "<br>#Sectors: " + deviceInfo[3].value).openPopup();
+					 					    + "<br>Antenna Tilt: " + deviceInfo[2].value + "<br>#Sectors: " 
+						      					+ deviceInfo[3].value);
 			}
 
 			if(deviceInfo[0].value == 'iot-device'){
