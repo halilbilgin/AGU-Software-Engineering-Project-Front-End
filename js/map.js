@@ -8,6 +8,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 		id: 'mapbox.streets'
 	}).addTo(mymap);
 
+	var cluster = new L.MarkerClusterGroup();
+
 	//L.marker([51.5, -0.09]).addTo(mymap)
 	//	.bindPopup("It is a base station.").openPopup();
 
@@ -16,14 +18,12 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 	var baseIcon = L.icon({
 	    iconUrl: 'img/baseS.png',
 	    iconSize:     [30, 30], // size of the icon
-
 			popupAnchor:  [-3, -15] // point from which the popup should open relative to the iconAnchor
 	});
 
 	var iotIcon = L.icon({
 	    iconUrl: 'img/iotD.png',
 	    iconSize:     [30, 30], // size of the icon
-
 			popupAnchor:  [-3, -15] // point from which the popup should open relative to the iconAnchor
 	});
 
@@ -42,6 +42,8 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 				 .bindPopup("<b>IoT Device</b>" + "<br>Distance from BaseStation: " + dist + "<br>Hardware: " + deviceInfo[1].value
 										+ "<br>OS Image: " + deviceInfo[2].value + "<br>Protocol: " + deviceInfo[4].value).openPopup();
 			allDevices.push(cloneDeviceInfo);
+			cluster.addLayer(iotMarker);
+			mymap.addLayer(cluster);
 		}
 	}
 
@@ -72,10 +74,13 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 					 					    + "<br>Antenna Tilt: " + deviceInfo[2].value + "<br>#Sectors: " + deviceInfo[3].value).openPopup();
 			}
 
-			if(deviceInfo[0].value == 'iot-device')
+			if(deviceInfo[0].value == 'iot-device'){
 				deviceInfo[deviceInfo.length] = {name:'dist', value:dist};
+				cluster.addLayer(iotMarker);
+			}
 
 			allDevices.push(deviceInfo);
+			mymap.addLayer(cluster);
 			deviceInfo = null;
 	}
 
