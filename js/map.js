@@ -74,6 +74,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 
 			if(deviceInfo[0].value == 'iot-device')
 				deviceInfo[deviceInfo.length] = {name:'dist', value:dist};
+
 			allDevices.push(deviceInfo);
 			deviceInfo = null;
 	}
@@ -85,7 +86,7 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
 	          c(lat1 * p) * c(lat2 * p) *
 	          (1 - c((lon2 - lon1) * p))/2;
 
-	  return 12742 * Math.asin(Math.sqrt(a)); // 2 * R; R = 6371 km
+	  return Math.round(12742 * Math.asin(Math.sqrt(a))*1000*100)/100; // 2 * R; R = 6371 km
 	}
 
 	function clear(){
