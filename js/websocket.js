@@ -5,14 +5,14 @@ if (! ( "WebSocket" in window) ){
  }
 
 // Let us open a web socket
-var ws = new WebSocket("ws://217.112.83.250:443/");
+var ws = new WebSocket("ws://localhost:443/");
 var chart;
 var lastRequest = false;
 var allDevices = [];
 var deviceInfo = [];
 var allMarkers = [];
 var seriesData = [];
-
+var options = [];
 
 ws.onopen = function()
 {
@@ -94,6 +94,20 @@ ws.onmessage = function (evt)
     seriesData[i].data.push( [new Date(received_msg.generalCharts[i].x*100), received_msg.generalCharts[i].y]);
     chart.series[i].setData(seriesData[i].data, true);
   }
+  rndm = getRandomInt(1, allDevices.length-1);
+
+  for(i = rndm; i < rndm+2; i++) {
+    var deviceInfo = allDevices[i];
+    console.log(deviceInfo);
+    var dist=distance(deviceInfo[8].value.lat,deviceInfo[8].value.lng, allDevices[0][4].value.lat, allDevices[0][4].value.lng);
+
+    popupText = "<b>IoT Device</b>" + "<br>Distance from BaseStation: " + dist + "<br>Hardware: " + deviceInfo[1].value
+    + "<br>OS Image: " + deviceInfo[2].value + "<br>Protocol: " + deviceInfo[4].value
+    + "<br>"+received_msg.allDevices[i];
+    allMarkers[i]._popup.setContent(popupText);
+    $(allMarkers[i]._icon).addClass("blinking");
+  }
+
 
 }
 ws.onclose = function()

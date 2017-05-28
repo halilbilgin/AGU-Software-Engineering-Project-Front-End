@@ -51,16 +51,15 @@
 </head>
 
 <body onload="">
-
-    <div class="container" style='width:100%'>
+    <div id="sf-map">
+      <div id="mapid"></div>
+    </div>
+    <div class="container up-part">
       <div class="row">
-          <h1> <img src="img/keysight.jpg" height="100" width="auto"></h1>
+          <h1 style='margin-top: 10px; margin-bottom: 0;'> <img src="img/keysight.jpg" height="100" width="auto"></h1>
       </div>
         <div class="row">
-            <div class="col-sm-10 col-lg-10" id="sf-map">
-              <div id="mapid" style='height:875px'></div>
-            </div>
-            <div class="col-md-2" id="sf-conf-pane">
+            <div class="col-md-12" id="sf-conf-pane">
                 <h5>Configuration Pane</h5>
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
@@ -80,25 +79,18 @@
                     <input type="hidden" name="type" value="iot-device">
                       <select name="hardware" class="form-control">
                         <option>Hardware Platform</option>
-                        <option value='x86 Generic Platform'>x86 Generic Platform</option>
                       </select>
 
                      <select name="os-image" class="form-control">
                          <option>OS Image</option>
-                         <option value='RioT x86'>RioT x86</option>
                        </select>
 
                        <select name="location" class="form-control">
                            <option>Location</option>
-                           <option value='Basement'>Basement</option>
-                           <option value='Street Level'>Street Level</option>
-                           <option value='Apartment'>Apartment</option>
                          </select>
 
                          <select name="protocol" class="form-control">
                              <option>Protocol</option>
-                             <option value='TCP'>TCP</option>
-                             <option value='UDP'>UDP</option>
                            </select>
 
                         <div class="form-group">
@@ -152,10 +144,10 @@
             </div>
           </div>
         </div>
-        <div class='container'>
+        <div class='container' style='clear:both; width: 600px; margin-right:10px'>
 	  <!-- Control Bar -->
 
-        <div class="row">
+        <div class="row" style='clear:both; width: 600px;'>
           <div class="col-12" id="sf-control-bar">
               <h3> Control Bar </h3>
 
@@ -164,9 +156,6 @@
               <input type="range" id='myRange' handle = "square" name='delay'  min="1" max="10" value="8" step="1" />
               <span id="range"> </span>
               <h1>
-
-
-
                   <script type="text/javascript">
                     function showValue(newValue)
                       {
@@ -190,46 +179,70 @@
               </button>
               &emsp;
               &emsp;
-              <h1><div id="txt"></div></h1>
               &emsp;
               &emsp;
-              <button class='btn btn-danger' type="reset" name="button" onclick='location.reload(true);'>Clear Map</button>
+            </div>
+            <div class="btn-group" style='display:block'>
+              <button class="btn btn-danger" type="reset" name="button" onclick="location.reload(true);" style="
+                  margin-top: 10px; float: left;
+              ">Clear Map</button>
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal" style="margin: 10px;margin-bottom: 0;display: block;float: left;">See Results</button>
+              <h1 style='display:inline-block; margin-top: 2px'><div id="txt"></div></h1>
             </div>
 
-          </div>
-
+            </div>
 	 </div>
 
 	<!-- Results Pane -->
 
-                  <div class="row">
-                    <div class="col-lg-12" id="sf-results-pane-header" >
-                      <h4>Results Area</h4>
-                      <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item"><a href="#results1" class="nav-link active" aria-controls="results1" role="tab" data-toggle="tab" >Results 1</a></li>
-                        <li class="nav-item"><a href="#results2" class="nav-link" aria-controls="results2" role="tab" data-toggle="tab" >Results 2</a></li>
-                        <li class="nav-item"><a href="#results3" class="nav-link" aria-controls="results3" role="tab" data-toggle="tab" >Results 3</a></li>
-                      </ul>
-                      <div class="tab-content" id="sf-results-panel">
-                        <div role="tabpanel" class="tab-pane active" id="results1" >
-                          <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                        </div>
 
-                        <div role="tabpanel" class="tab-pane fade" id="results2">
-                          <div id="pdf-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-
-                        </div>
-
-                        <div role="tabpanel" class="tab-pane fade" id="results3">
-                            <div id='cdf-container' style="min-width: 310px; height: 400px; margin: 0 auto"></div>
-                        </div>
-                    </div>
-
-                  </div>
-                </div>
    </div>
+   <div class="" style='clear:both'>
+
+   </div>
+   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog" style='width:800px!important; max-width:800px!important'>
+
+      <!-- Modal content-->
+      <div class="modal-content" >
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Results</h4>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-lg-12" id="sf-results-pane-header" >
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item"><a href="#results1" class="nav-link active" aria-controls="results1" role="tab" data-toggle="tab" >Results 1</a></li>
+                <li class="nav-item"><a href="#results2" class="nav-link" aria-controls="results2" role="tab" data-toggle="tab" >Results 2</a></li>
+                <li class="nav-item"><a href="#results3" class="nav-link" aria-controls="results3" role="tab" data-toggle="tab" >Results 3</a></li>
+              </ul>
+              <div class="tab-content" id="sf-results-panel">
+                <div role="tabpanel" class="tab-pane active" id="results1" >
+                  <div id="container1" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="results2">
+                  <div id="pdf-container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+                </div>
+
+                <div role="tabpanel" class="tab-pane fade" id="results3">
+                    <div id='cdf-container' style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
