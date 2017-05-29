@@ -87,6 +87,9 @@ ws.onopen = function()
 ws.onmessage = function (evt)
 {
   var received_msg = JSON.parse(evt.data);
+  if(received_msg.type =='ping') {
+    return false;
+  }
   if(received_msg.generalCharts[0].x == 0)
     return false;
 

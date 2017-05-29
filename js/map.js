@@ -88,7 +88,7 @@ $(function() {
 	$(document).on('click','.leaflet-marker-icon', function(){
 		$(this).removeClass('blinking');
 	})
-	$('body').height(window.innerHeight+70);
+	$('body').height((window.innerHeight > screen.height ? window.innerHeight : screen.height) +200);
 	mymap = L.map('mapid', {scrollWheelZoom:false, minZoom:13}).setView([38.742152, 35.470884], 15);
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 			maxZoom: 15,
